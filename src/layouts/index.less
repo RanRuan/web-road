@@ -1,0 +1,80 @@
+// 弹性容器 flex container 属性
+.navs {
+  height: 100vh;
+  display: flex;
+  // display: inline-flex;
+  // flex-direction: column-reverse; 主轴排列方向
+  flex-wrap: nowrap; //换行规则
+  justify-content: flex-start; // 主轴对齐 水平方向 space-evenly 间隔完全均匀
+  //  align-items: center; //交叉轴对齐。垂直方向 默认stretch 当子项目为设置高度 会自动拉伸填满容器高度
+  //  align-content: space-around; // 多行交叉轴对齐。垂直方向 与flex-wrap: wrap; 搭配使用
+
+  //弹性项目（Flex Items）属性
+  /*
+  order:0; 默认0  项目越小越靠前 可以为负数
+  flex-grow: 默认为0 不放大 1均匀分配剩余空间
+  flex-shrink:默认为1 项目可以缩小
+  flex-basis（初始主轴尺寸） 默认auto 200px 50%
+  flex（组合属性）: 0 1 20%
+  align-self（单个项目对齐）: auto;  继承容器的align-items 
+  */ 
+  >ul {
+    background-color: red;
+    list-style: none;
+    padding: 0;
+    // justify-content: center;
+    // text-align: center;
+    // margin: 0;
+    // width: 80%;
+    // order:3
+    // flex-grow: 0.2;
+    // overflow: hidden;
+    margin: 0;
+    // width: 200px;
+    // flex-grow: 0.2;
+    // flex-shrink: 0; //默认1 可以缩小 0 不可以缩小
+    // flex-basis: 500px;
+
+    flex: 0 0 200px; // 组合属性 是否放大 是否缩小 初始宽度
+    // align-self: center;
+
+  }
+  /*
+  BFC 块级格式化上下文 overflow:hidden display:flow-foot 设置padding; 不推荐:float position border:1px border transparent;
+    1. margin塌陷: 父元素与子元素之间的外边距合并问题，导致子元素的margin值被父元素继承
+    2. 清除浮动; 不会引起父容器塌陷
+    3. 实现两栏布局 boxleft浮动  boxright:bfc;
+    
+    现代方案:
+    .container {
+      display: flow-root;  
+    }
+
+    或 
+    .container {
+      display: flex;
+      flex-direction: column;
+    }
+
+    或
+    .container {
+      display: grid;
+    }
+  */
+  li {
+    margin: 16px;
+  }
+  
+  > div {
+    flex-grow: 2;
+    background-color: yellow;
+    // flex-grow: 0.8;
+  }
+
+  > span {
+    background-color: blue;
+  }
+
+
+
+}

@@ -1,0 +1,38 @@
+.wrap {
+   margin: 0 auto;
+   padding:0 40px;
+    :first-child::first-letter{
+        font-size: 40px;
+    }
+}
+.html {
+    .flexBox {
+        // height: 600px;
+        display: flex;
+        padding: 0;
+        // flex-wrap: wrap;
+        // align-content: flex-end;
+        justify-content: space-around;
+        align-items: center;
+        border: 1px solid red;
+        list-style: none;
+        height: 150px;
+        >li {
+            border: 1px solid #000;
+            height: 50px;
+            flex: 0 1 50px;
+            align-self: flex-start;
+        }
+         >li:nth-of-type(odd) {
+            border: 1px solid #000;
+            height: 50px;
+            flex: 0 1 50px;
+            align-self: flex-end;
+
+        }
+        
+        >li:nth-child(even){
+            background-color: aqua;
+        }
+    }
+}
