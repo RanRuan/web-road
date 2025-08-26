@@ -37,7 +37,9 @@
 
     flex: 0 0 200px; // 组合属性 是否放大 是否缩小 初始宽度
     // align-self: center;
-
+     li {
+    margin: 16px;
+  }
   }
   /*
   BFC 块级格式化上下文 overflow:hidden display:flow-foot 设置padding; 不推荐:float position border:1px border transparent;
@@ -61,19 +63,7 @@
       display: grid;
     }
   */
-  li {
-    margin: 16px;
-  }
-  
-  > div {
-    flex-grow: 2;
-    background-color: yellow;
-    // flex-grow: 0.8;
-  }
-
-  > span {
-    background-color: blue;
-  }
+ 
 
 
 

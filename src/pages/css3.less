@@ -1,0 +1,110 @@
+@import './style.less';
+
+.css3 {
+// 选择器:
+// * { margin: 0; }              /* 通配符选择器 */
+// p { color: green; }           /* 元素选择器 */
+// .box { color: blue; }         /* 类选择器 */
+// #title { font-weight: bold; } /* ID选择器 */
+// h1, h2 { color: red; }        /* 分组选择器 */
+// div p { color: red; }     /* 后代选择器 */
+// div > p { color: blue; }  /* 子选择器 */
+// h1 + p { color: green; }  /* 相邻兄弟 */ 选中后续兄弟
+// h1 ~ p { color: purple; } /* 通用兄弟 */ 选中后续兄弟
+  .selector {
+    // 属性选择器 找到标签的属性 选择
+    a[target='_blank']{
+      color: grey;
+    }
+    a[href^="https"] { text-decoration: underline;} 
+    a[href$="com"] { font-weight: 600;} 
+
+    /**
+      伪类选择器:它不会真正创造一个新元素，而是描述已有元素的某个特征
+        作用：选中元素的某种「状态」或「特殊位置」。
+        状态类::hover :checked :disabled :focus
+        结构类::first-child :last-child :nth-type-of(even/odd/2)
+        逻辑类：:not()排除、:is()
+    */ 
+
+    /*
+    :nth-child(n) :按 所有子元素的顺序 计算位置。
+    :nth-of-type(n):按 相同标签类型的顺序 计算位置。 适合结构一致的列表
+    
+    */
+
+    .staticPseudo {
+      >:first-child{
+        background-color: red;
+      }
+      >:last-child {
+        background-color: blueviolet;
+      }
+      >:nth-child(odd) {
+        color: blue;
+      }
+      >:nth-child(even) {
+        color: rosybrown;
+      }
+
+      >:nth-of-type(5){
+        background-color: black;
+      }
+      // 排除某类:not(:状态/.className)
+      >li input:not(:disabled) { border-color: blue; }
+      >li input:disabled { border-color: red; }
+     
+    }
+    
+    // 动态伪类选择器
+    .dynamicPseudo {
+      input:focus {
+        border: 10px solid red;
+      }
+      a:hover{
+        color: red;
+      }
+    }
+    // 逻辑伪类选择器
+    .logicPseudo {
+      input:not(:disabled) {
+        border-color: red;
+      }
+      :is(p,label){
+        font-size:20px;
+      }
+      p:has(img){
+        border: 1px solid blue;
+        display: block;
+        >img {
+          width: 160px;
+        }
+      }
+    }
+    }
+
+    // 伪元素选择器
+    .pseudoElement {
+     p:first-letter{
+      font-size: 30px;
+     }
+      p:first-line{
+      color: red;
+     }
+     ::placeholder {
+      color:red
+     }
+     p::selection{
+      color: blue;
+      text-decoration:underline;
+      background-color:yellow;
+      text-shadow: 2px;
+     }
+     ul>li::marker{
+      color: red;
+      
+     }
+
+    }
+
+  }
