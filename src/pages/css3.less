@@ -1,6 +1,66 @@
 @import './style.less';
 
 .css3 {
+  .collapse {
+     >pre {
+        background-color: #ddd;
+      }
+
+    .collapseBox {
+      width: 200px;
+      height: 200px;
+      background-color: #ddd;
+      margin: 30px 0;
+        // padding: 1px;
+        // border: 1px solid blue;
+        // overflow: scroll;
+        // display: flow-root;
+
+      .collapseBoxIn {
+        // overflow: hidden;
+        height: 100px;
+        width: 100px;
+        margin: 20px 0;
+        background-color: red;
+      }
+    }
+    .float {
+      // border: 1px solid #ccc;
+      // overflow: hidden;
+      // height: 100px;
+      // clear: both;
+      .floatBox {
+        // display: flow-root; 
+       >div:has(img) {
+        border: 1px solid #ccc; 
+        img {
+          float: right;
+          width: 200px;
+        
+        }  
+        .right {
+         clear: both;
+        }  
+      }
+      }
+    .clearBox{     
+       &::after {
+        content: '';
+        display: block;
+        clear: both;
+       }
+      // display:flow-root;
+         >li{
+          float: left;
+          width: 50px;
+          height: 50px;
+          background-color: #ddd;
+        }
+      }
+     
+    
+  }
+  }
 // 选择器:
 // * { margin: 0; }              /* 通配符选择器 */
 // p { color: green; }           /* 元素选择器 */
@@ -95,10 +155,11 @@
       color:red
      }
      p::selection{
+      // 只生效这几种
       color: blue;
       text-decoration:underline;
       background-color:yellow;
-      text-shadow: 2px;
+      text-shadow: 10px 2px 2px #ddd;
      }
      ul>li::marker{
       color: red;
@@ -107,4 +168,61 @@
 
     }
 
+    .flex {
+      .flexBox {
+        border: 1px solid #ccc;
+        height: 300px;
+        width: 230px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        align-content:space-around;
+        >li {
+          height: 50px;
+          width: 50px;
+          background-color: red;
+          
+        }
+        >li:nth-of-type(even) {
+          height: 80px;
+          //order: 1;
+          // flex-grow: 1;
+          //flex-basis: min-content;
+          
+        }
+      }
+      .flexBoxItems {
+        display: flex;
+        width: 200px;
+        border: 1px solid red;
+        flex-wrap: wrap;
+        height: 300px;
+
+        justify-content: space-between;
+        align-items: center;
+        // align-content: space-between;
+        >li{
+          background-color: #ddd;
+           flex:0 1 60px;
+           border: 1px solid black;
+          //  text-align: center;
+           word-break: break-all;
+        }
+         >li:nth-of-type(odd){
+          background-color: yellow;
+          // order: 1;
+          
+        }
+          >li:nth-of-type(even){
+              
+          //  flex:0 0 max-content;
+          //  align-self: baseline;
+        }
+         >li:first-child{
+          align-self: flex-start;
+         }
+      }
+    }
   }
