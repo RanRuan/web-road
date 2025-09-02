@@ -131,7 +131,7 @@ const Css3 = () => {
     flex-shrink:1|0; 默认宽度之和大于容器的时候才会发生收缩;
     flex-basis:auto|百分比|50px指定了 flex 元素在主轴方向上的 flex 项目的初始长度;
     flex: 以上三个属性的组合;
-    align-self:stretch|flex-start|flex-end|center|baseline 默认继承容器的align-items
+    align-self:stretch|flex-start|flex-end|center|baseline 默认继承容器的
           `}
          </pre>
         <ul className={styles.flexBox}>

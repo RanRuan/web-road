@@ -2,7 +2,7 @@ import React from 'react';
 import { LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 const DATA = [
-  {key:'HTML5', label:'HTML5',  children:[
+  {key:'html5', label:'HTML5',  children:[
     {key:'box', label:'盒模型'},
     {key:'bfc', label:'BFC'}]},
   {key:'CSS3', label:'CSS3', 

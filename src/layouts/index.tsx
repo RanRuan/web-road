@@ -3,11 +3,12 @@ import { LaptopOutlined,MailOutlined, NotificationOutlined, UserOutlined,Appstor
 import type { MenuProps,MenuItemProps } from 'antd';
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
 import styles from './index.less';
+import { Outlet, history } from 'umi';
 const { Header, Content, Sider } = Layout;
 import {navList, DATA} from './menu';
 
 const App: React.FC = () => {
-  const [navKey, setNavKey] = useState(['HTML5']);
+  const [navKey, setNavKey] = useState(['html5']);
   const [menuList, setMenuList] = useState([]);
   const [menukey, setMenukey]= useState([]);
   
@@ -21,7 +22,7 @@ const App: React.FC = () => {
     });
     const children = found?.children ?? [];
     setMenuList(children);
-    setMenukey(children[0]?.key);
+    setMenukey([children[0]?.key]);
   },[DATA])
 
   const onChangeNav: MenuProps['onClick']  = (nav) => {
@@ -29,6 +30,12 @@ const App: React.FC = () => {
     const _menuList = DATA?.find(it => it.key === nav.key)?.children;
     setMenuList(_menuList);
     setMenukey(_menuList[0]?.key);
+    history.push(`/${nav.selectedKeys}`)
+  }
+
+  const onChangeMenu: MenuProps['onClick']  = (nav) => {
+   
+    setMenukey([nav.key]);
   }
 
   return (
@@ -38,7 +45,7 @@ const App: React.FC = () => {
         <Menu
           theme="dark"
           mode="horizontal"
-          defaultSelectedKeys={['HTML5']}
+          defaultSelectedKeys={['html5']}
           items={navList}
           style={{ flex: 1, minWidth: 0 }}
           selectedKeys={navKey}
@@ -54,23 +61,20 @@ const App: React.FC = () => {
             // defaultOpenKeys={navKey}
             style={{ height: '100%', borderInlineEnd: 0 }}
             items={menuList}
+            onSelect={onChangeMenu}
           />
         </Sider>
         <Layout style={{ padding: '0 24px 24px' }}>
-          {/* <Breadcrumb
-            items={[{ title: 'Home' }, { title: 'List' }, { title: 'App' }]}
-            style={{ margin: '16px 0' }}
-          /> */}
           <Content
             style={{
               padding: 24,
               margin: 0,
-              minHeight: 280,
+              minHeight: 'calc(100vh - 78px)',
               background: colorBgContainer,
               borderRadius: borderRadiusLG,
             }}
           >
-            Content
+          <Outlet context={{ comKey: menukey}}/>
           </Content>
         </Layout>
       </Layout>
