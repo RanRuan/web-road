@@ -9,4 +9,5 @@ export default defineConfig({
     { path: "/es6", component: "es6" },
   ],
   npmClient: 'npm',
+  
 });

@@ -3,8 +3,8 @@ import { LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/
 import type { MenuProps } from 'antd';
 const DATA = [
   {key:'html5', label:'HTML5',  children:[
-    {key:'box', label:'盒模型'},
-    {key:'bfc', label:'BFC'}]},
+    {key:'html', label:'结构'},
+    {key:'html5', label:'html5新特性'}]},
   {key:'CSS3', label:'CSS3', 
     children:[
     {key:'flex', label:'弹性布局'},
