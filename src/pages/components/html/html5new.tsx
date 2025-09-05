@@ -86,6 +86,41 @@ const Html5New:React.FC = () => {
     sessionStorage.setItem("session", 'dfffd')
   }
 
+  const delStorage = () => {
+    localStorage.removeItem('ruanyuan');
+    sessionStorage.removeItem('session');
+  }
+
+  useEffect(() => {
+    const socket = new WebSocket("ws://localhost:8888");
+   // 连接成功
+    socket.onopen = () => {
+      console.log("WebSocket 已连接");
+      socket.send("Hello Server!");
+    };
+
+    // 接收消息
+    socket.onmessage = (event) => {
+      console.log("收到服务端消息:", event.data);
+    };
+    return () => {
+      socket.close()
+    }
+  }, [])
+
+const draw = () => {
+  var c=document.getElementById("myCanvas");
+  var cxt=c.getContext("2d");
+  cxt.fillStyle="#FF0000";
+  cxt.beginPath();
+  cxt.arc(70,18,15,0,Math.PI*2,true);
+  cxt.closePath();
+  cxt.fill();
+}
+
+useEffect(() => {
+  draw()
+},[])
 
   return (
       <div className={styles.html5new}>
@@ -148,10 +183,35 @@ const Html5New:React.FC = () => {
              </div>
           </li>
            <li>
-             <strong>7.web 储存localstorage</strong>
+             <strong>7.web 储存localstorage [5M]</strong>
              <button onClick={onSave}>储存本地</button>
-             <p>window.localStorage - 存储没有截止日期的数据</p>
+             <button onClick={delStorage}>删除存储</button>
+             <p>window.localStorage - 同源保存 存储没有截止日期的数据</p>
              <p>window.sessionStorage - 针对一个 session 来存储数据（当关闭浏览器标签页时数据会丢失）</p>
+          </li>
+           <li>
+             <strong>7.web 储存localstorage [5M]</strong>
+             <button onClick={onSave}>储存本地</button>
+             <button onClick={delStorage}>删除存储</button>
+             <p>window.localStorage - 同源保存 永久</p>
+             <p>window.sessionStorage - 针对一个 session会话 来存储数据（当关闭浏览器标签页时数据会丢失, 仅限当前标签页）</p>
+          </li>
+          <li>
+             <strong>8.web worker</strong>
+              <p>它是 HTML5 提供的一种在后台运行脚本的机制，可以让 JS 在单独线程中运行，避免阻塞主线程</p>
+          </li>
+          <li>
+             <strong>9.web socket</strong>
+              <mark>双向通讯,长连接的通信协议</mark>
+              <p>HTTP：请求-响应模式，客户端必须主动发起,WebSocket：建立连接后，客户端和服务端都可以随时主动发送消息。</p>
+              <p>客户端发起握手,服务器接受握手 切换到websocket 保持长连接, 关闭时 双方都可以 close()</p>
+          </li>
+
+          <li>
+            <strong>10.Canvas画图</strong>
+            <mark>canvas 拥有多种绘制路径、矩形、圆形、字符以及添加图像的方法</mark>
+            <canvas id="myCanvas" width="400" height="400"></canvas>
+
           </li>
        </ul>
        
