@@ -13,3 +13,35 @@
   }
  }
 }
+
+ .html5Tag {
+  >li:nth-of-type(3) {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      // border: 1px solid #ccc;
+     > * {
+      flex: 1 0 fill;
+     }
+  }
+ }
+
+ .drag {
+  display: flex;
+  justify-content: space-evenly;
+  >p {
+    flex: 0 0 200px;
+    border: 1px solid red;
+    height: 200px;
+    padding: 20px;
+    background-color: aquamarine;
+
+  }
+  >p:has(img) {
+    border: 4px dotted darkgray;
+    >img {
+      width: 200px;
+    }
+  }
+
+ }

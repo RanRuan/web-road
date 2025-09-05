@@ -1,7 +1,7 @@
 import React from 'react';
 import { LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
-const DATA = [
+const DATA = [ {key:'/', label:'Home',  children:[]},
   {key:'html5', label:'HTML5',  children:[
     {key:'html', label:'结构'},
     {key:'html5', label:'html5新特性'}]},

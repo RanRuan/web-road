@@ -26,11 +26,20 @@ const App: React.FC = () => {
   },[DATA])
 
   const onChangeNav: MenuProps['onClick']  = (nav) => {
+    console.log(nav, '9999');
     setNavKey(nav.selectedKeys);
-    const _menuList = DATA?.find(it => it.key === nav.key)?.children;
-    setMenuList(_menuList);
-    setMenukey(_menuList[0]?.key);
-    history.push(`/${nav.selectedKeys}`)
+
+    if(nav.key !== "/"){
+      const _menuList = DATA?.find(it => it.key === nav.key)?.children;
+      setMenuList(_menuList);
+      setMenukey(_menuList[0]?.key);
+      history.push(`/${nav.selectedKeys}`)
+
+    }else {
+      setMenuList([]);
+      history.push(`/`)
+    }
+   
   }
 
   const onChangeMenu: MenuProps['onClick']  = (nav) => {
@@ -53,6 +62,8 @@ const App: React.FC = () => {
         />
       </Header>
       <Layout>
+        <>
+        {!!menuList?.length&&
         <Sider width={200} style={{ background: colorBgContainer }}>
           <Menu
             mode="inline"
@@ -63,7 +74,8 @@ const App: React.FC = () => {
             items={menuList}
             onSelect={onChangeMenu}
           />
-        </Sider>
+        </Sider>}
+        </>
         <Layout style={{ padding: '0 24px 24px' }}>
           <Content
             style={{

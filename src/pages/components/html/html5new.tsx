@@ -1,11 +1,12 @@
 import styles from './style.less'
 import React, { useEffect, useState, useRef } from 'react';
+import yayJpg from '@/assets/yay.jpg';
 
 const Html5New:React.FC = () => {
   // 使用 ref 保存 timerId，避免重新渲染时丢失
   const timerIdRef = useRef<number | undefined>(undefined);
   const progressRef = useRef<number>(0);
-
+  const dragRef = useRef();
   // 进度更新逻辑
   const startProgress = () => {
     const step = 10;
@@ -28,13 +29,6 @@ const Html5New:React.FC = () => {
   };
 
  useEffect(() => {
-//   function step(timestamp) {
-//   // 动画逻辑
-//   console.log("下一帧时间戳:", timestamp);
-//   requestAnimationFrame(step); // 继续下一帧
-// }
-// requestAnimationFrame(step);
-    // 初始化进度
     progressRef.current = 0;
     const id = window.setInterval(startProgress, 1000);
     timerIdRef.current = id;
@@ -46,22 +40,123 @@ const Html5New:React.FC = () => {
       }
     };
   }, []); 
+
+  // 获取定位
+
+  const getLocation = () => {
+    
+    if(navigator.geolocation){
+    console.log(navigator.geolocation, 'navigator.geolocation', );
+
+     navigator.geolocation.getCurrentPosition((info) => {
+        console.log(info, '000000')
+      }, (error) => {
+        console.log(error, 'error');
+        
+      });
+    }
+  }
+
+  useEffect(() => {
+    getLocation()
+  }, [])
+
+  // 拖放的内容 - ondragstart 和 setData()
+  const onDragStart = (e) => {
+    console.log(e, '在拖拽');
+    // console.log(drogref)
+    e.dataTransfer.setData('img', e.target.id);
+    
+  }
+
+    // 拖到何处 - ondragover
+  const onDragOver = (e: { preventDefault: () => void; }) => {
+    e.preventDefault()
+  }
+
+
+  // 进行放置 - ondrop
+   const onDrop = (e) => {
+    let dropId = e.dataTransfer.getData('img');
+    e.target.appendChild(document.getElementById(dropId));
+  }
+
+  const onSave = () => {
+    localStorage.setItem('ruanyuan', "wocunde neitong ");
+    sessionStorage.setItem("session", 'dfffd')
+  }
+
+
   return (
       <div className={styles.html5new}>
-        <header>这是头标签,用在页眉</header>
-        <main>这是main标签, 用于主要内容</main>
-        <article>article标签,文章</article>
-        <figure>
-          <figcaption>figcaption标签,元素标签</figcaption>
-          figure标签,规定独立的流内容
-        </figure>
-        <progress id='progressTag' max="100">progress 进度条</progress>
-        <cite>cite标签, 包含文本引用,书籍标题</cite>
-        <mark>mark标签</mark>
-        <small>small标签,显示小号字体 用于版权申明</small>
-        <del>del标签. 删除的内容</del>
-        <code>code标签,标记代码</code>
-        <abbr title="china">abbr标签 标识缩写CN</abbr>
+       <ul className={styles.html5Tag}>
+          <li>
+            <strong>1.结构类标签</strong>
+             <header>这是头标签,用在页眉</header>
+             <nav>nav 导航类</nav>
+              <main>这是main标签, 用于主要内容</main>
+              <section>section 节</section>
+              <aside>aside 侧边栏</aside>
+              <article>article标签,文章</article>
+              <figure>
+                <figcaption>figcaption标签,元素标签</figcaption>
+                figure标签,规定独立的流内容
+              </figure>
+              <footer>footer 尾部</footer>
+          </li>
+          <li>
+            <strong>2.进度条</strong>
+            <progress id='progressTag' max="100">progress 进度条</progress>
+          </li>
+          <li>
+             <strong>3.字体修饰类</strong>
+              <cite>cite标签, 包含文本引用,书籍标题</cite>
+              <mark>mark标签</mark>
+              <small>small标签,显示小号字体 用于版权申明</small>
+              <del>del标签. 删除的内容</del>
+              <code>code标签,标记代码</code>
+              <abbr title="china">abbr标签 标识缩写CN</abbr>
+          </li>
+           <li>
+             <strong>4.表单类</strong>
+             <input id="myCar" list="cars" placeholder='这是一个绑定的选项'/>
+              <datalist id="cars">
+                <option value="1">option1</option>
+                <option value="2">option2</option>
+                <option value="3">option3</option>
+              </datalist>
+              <input type="color" placeholder='color选择器' />
+              <input type="url" placeholder='url输入框' />
+              <input type="date" placeholder='日期选择器' />
+              <input type="time" placeholder='时间选择器' />
+              <input type="range" placeholder='范围选择器' min="0"/>
+              <input maxLength={3} minLength={1} onInput={() => {
+                // alert('正在输入中')
+              }}/>
+          </li>
+           <li>
+             <strong>5.定位</strong>
+             <div>您的定位是:</div>
+          </li>
+            <li>
+             <strong>6.拖放pai</strong>
+             <div className={styles.drag}>
+               <p onDrop={onDrop} onDragOver={onDragOver} id='p1'>
+                <img src={yayJpg} draggable onDragStart={onDragStart} id='img'/>
+               </p> 
+               <p onDrop={onDrop} onDragOver={onDragOver} id='p2'></p> 
+             </div>
+          </li>
+           <li>
+             <strong>7.web 储存localstorage</strong>
+             <button onClick={onSave}>储存本地</button>
+             <p>window.localStorage - 存储没有截止日期的数据</p>
+             <p>window.sessionStorage - 针对一个 session 来存储数据（当关闭浏览器标签页时数据会丢失）</p>
+          </li>
+       </ul>
+       
+        
+       
       </div>
   );
 };
